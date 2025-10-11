@@ -22,15 +22,16 @@ Image Analysis Workflow:
   * The CNN model processes the image and identifies potential diseases (e.g., Blight, Rust, Mosaic).
   * The dashboard displays the disease diagnosis 
 
+
 **Machine Learning Workflow:**
-  1. Data Preprocessing
+ 1. Data Preprocessing
     * Soil and weather data normalized and cleaned
     * Leaf images resized, augmented, and labeled
-  2. Model Training & Evaluation
+ 2. Model Training & Evaluation
     * Crop Recommendation: Trained using supervised learning (Random Forest)
     * Disease Detection: CNN model trained on plant disease datasets (e.g., PlantVillage)
     * Evaluated using metrics like accuracy, F1-score, and confusion matrix
-  3. Prediction & Output
+ 3. Prediction & Output
     * Real-time predictions for best crop selection
     * Instant disease detection upon image upload
 
