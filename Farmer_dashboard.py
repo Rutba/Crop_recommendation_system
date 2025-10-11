@@ -20,24 +20,21 @@ import requests
 import pickle
 import os
 import zipfile
+import gdown
+
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-@st.cache_resource
 def download_and_extract_dataset():
     if not os.path.exists("PlantDoc-Dataset"):
-        url = "https://drive.google.com/file/d/1mkMi8S2fjnSzzlPNF_udk1J495Zu4K5l/view?usp=sharing"
-        r = requests.get(url)
-        with open("PlantDoc-Dataset.zip", "wb") as f:
-            f.write(r.content)
-        
-        # Check file size
-        if os.path.getsize("PlantDoc-Dataset.zip") < 10000:  # less than 10KB? probably not the real ZIP
-            st.error("Download failed — check your Google Drive link or file size.")
-        else:
-            # Unzip only if it seems valid
-            with zipfile.ZipFile("PlantDoc-Dataset.zip", 'r') as zip_ref:
-                zip_ref.extractall("PlantDoc-Dataset")
+        # Replace with your actual file ID
+        file_id = "1mkMi8S2fjnSzzlPNF_udk1J495Zu4K5l"
+        url = f"https://drive.google.com/uc?id={file_id}"
+        output = "PlantDoc-Dataset.zip"
+        gdown.download(url, output, quiet=False)
+
+        with zipfile.ZipFile(output, 'r') as zip_ref:
+            zip_ref.extractall("PlantDoc-Dataset")
             
 
 # Call the function at app start
