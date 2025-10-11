@@ -32,7 +32,7 @@ def download_and_extract_dataset():
             f.write(r.content)
         
         # Check file size
-        if os.path.getsize("plantDoc-Dataset.zip") < 10000:  # less than 10KB? probably not the real ZIP
+        if os.path.getsize("PlantDoc-Dataset.zip") < 10000:  # less than 10KB? probably not the real ZIP
             st.error("Download failed — check your Google Drive link or file size.")
         else:
             # Unzip only if it seems valid
