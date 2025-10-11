@@ -69,7 +69,7 @@ download_and_extract_dataset()
 # Set up the ImageDataGenerator
 train_datagen = ImageDataGenerator(rescale=1.0/255.0, horizontal_flip=True, vertical_flip=True)
 train_generator = train_datagen.flow_from_directory( 
-    'PlantDoc-Dataset/train',  # Specify the dataset path
+    '/PlantDoc-Dataset/train',  # Specify the dataset path
     target_size=(224, 224),  # Resize images to 224x224
     batch_size=32,
     class_mode='categorical'
