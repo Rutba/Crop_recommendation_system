@@ -18,18 +18,38 @@ import streamlit as st
 import tensorflow as tf
 import requests
 import pickle
+import os
+import zipfile
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+@st.cache_resource
+def download_and_extract_dataset():
+    if not os.path.exists("PlantDoc-Dataset"):
+        url = "https://drive.google.com/file/d/1mkMi8S2fjnSzzlPNF_udk1J495Zu4K5l/view?usp=sharing"
+        r = requests.get(url)
+        with open("PlantDoc-Dataset.zip", "wb") as f:
+            f.write(r.content)
+
+        with zipfile.ZipFile("PlantDoc-Dataset.zip", 'r') as zip_ref:
+            zip_ref.extractall("PlantDoc-Dataset")
+
+# Call the function at app start
+download_and_extract_dataset()
+
+
 
 # Load images from directories with subdirectories as categories
 # Set up the ImageDataGenerator
 train_datagen = ImageDataGenerator(rescale=1.0/255.0, horizontal_flip=True, vertical_flip=True)
 train_generator = train_datagen.flow_from_directory( 
-    '/python_project/PlantDoc-dataset/train',  # Specify the dataset path
+    'PlantDoc-Dataset/train',  # Specify the dataset path
     target_size=(224, 224),  # Resize images to 224x224
     batch_size=32,
     class_mode='categorical'
 )
+
+
 
 
 # Load model and encoder
