@@ -26,7 +26,7 @@ import gdown
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 def download_and_extract_dataset():
-    url = "https://www.dropbox.com/scl/fi/3fqzgib170fjdmqi9j067/PlantDoc-Dataset.zip?rlkey=dj5we8s990p22gc4u006mlx43&st=9re4c86q&dl=0"
+    url = "https://www.dropbox.com/scl/fi/3fqzgib170fjdmqi9j067/PlantDoc-Dataset.zip?rlkey=dj5we8s990p22gc4u006mlx43&st=9re4c86q&dl=1"
     output = "PlantDoc-Dataset.zip"
 
     if not os.path.exists("PlantDoc-Dataset"):
