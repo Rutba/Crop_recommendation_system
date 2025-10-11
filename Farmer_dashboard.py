@@ -27,16 +27,40 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 def download_and_extract_dataset():
     url = "https://www.dropbox.com/scl/fi/3fqzgib170fjdmqi9j067/PlantDoc-Dataset.zip?rlkey=dj5we8s990p22gc4u006mlx43&st=9re4c86q&dl=1"
-    output = "PlantDoc-Dataset.zip"
+    zip_path = "PlantDoc-Dataset.zip"
+    extract_path = "PlantDoc-Dataset"
 
-    if not os.path.exists("PlantDoc-Dataset"):
-        r = requests.get(url)
-        with open(output, "wb") as f:
-            f.write(r.content)
+    if not os.path.exists(extract_path):
+        st.info("Downloading dataset... This may take a few minutes.")
 
-        with zipfile.ZipFile(output, 'r') as zip_ref:
-            zip_ref.extractall("PlantDoc-Dataset")
+        # Download the file
+        try:
+            response = requests.get(url, stream=True)
+            with open(zip_path, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+        except Exception as e:
+            st.error(f"Download failed: {e}")
+            return
 
+        # Check file size — basic validation
+        file_size = os.path.getsize(zip_path)
+        st.write(f"Downloaded file size: {file_size / (1024*1024):.2f} MB")
+
+        if file_size < 100_000:  # less than 100KB
+            st.error("Downloaded file seems too small. Likely an HTML error, not a real ZIP.")
+            return
+
+        # Try extracting
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(extract_path)
+            st.success("Dataset extracted successfully.")
+        except zipfile.BadZipFile:
+            st.error("Downloaded file is not a valid ZIP file. Check the Dropbox link.")
+
+            
 # Call the function at app start
 download_and_extract_dataset()
 
