@@ -26,16 +26,16 @@ import gdown
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 def download_and_extract_dataset():
+    url = "https://www.dropbox.com/scl/fi/3fqzgib170fjdmqi9j067/PlantDoc-Dataset.zip?rlkey=dj5we8s990p22gc4u006mlx43&st=9re4c86q&dl=0"
+    output = "PlantDoc-Dataset.zip"
+
     if not os.path.exists("PlantDoc-Dataset"):
-        # Replace with your actual file ID
-        file_id = "1mkMi8S2fjnSzzlPNF_udk1J495Zu4K5l"
-        url = f"https://drive.google.com/uc?id={file_id}"
-        output = "PlantDoc-Dataset.zip"
-        gdown.download(url, output, quiet=False)
+        r = requests.get(url)
+        with open(output, "wb") as f:
+            f.write(r.content)
 
         with zipfile.ZipFile(output, 'r') as zip_ref:
             zip_ref.extractall("PlantDoc-Dataset")
-            
 
 # Call the function at app start
 download_and_extract_dataset()
