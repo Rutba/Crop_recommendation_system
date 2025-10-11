@@ -1,19 +1,19 @@
 # Crop_recommendation_system
 We developed an intelligent, AI-powered dashboard designed to assist farmers in making data-driven decisions for improving agricultural productivity. The system empowers farmers to make informed agricultural decisions by recommending the best crop to plant and detecting crop diseases from leaf images. It integrates user-provided soil data with real-time environmental inputs to deliver personalized insights that enhance crop yield and reduce losses.
 
-Key Features & Functionalities:
-1. Crop Recommendation System (CRS)
+**Key Features & Functionalities:**
+**1. Crop Recommendation System (CRS)**
 A machine learning model predicts the most suitable crop to plant based on a combination of:
-User-Provided Soil Parameters:
+* User-Provided Soil Parameters:
   * Nitrogen (N)
   * Phosphorus (P)
   * Potassium (K)
   * pH Level
-Automatically Fetched Environmental Data:
+* Automatically Fetched Environmental Data:
   * Temperature
   * Humidity
   * Rainfall
-2. Plant Disease Detection
+**2. Plant Disease Detection**
 A Convolutional Neural Network (CNN) is used to detect plant diseases from leaf images uploaded by users.
 Image Analysis Workflow:
   * Users upload a photo of an infected plant leaf.
