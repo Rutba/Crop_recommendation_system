@@ -30,13 +30,18 @@ def download_and_extract_dataset():
         r = requests.get(url)
         with open("PlantDoc-Dataset.zip", "wb") as f:
             f.write(r.content)
-
-        with zipfile.ZipFile("PlantDoc-Dataset.zip", 'r') as zip_ref:
-            zip_ref.extractall("PlantDoc-Dataset")
+        
+        # Check file size
+        if os.path.getsize("plantDoc-Dataset.zip") < 10000:  # less than 10KB? probably not the real ZIP
+            st.error("Download failed — check your Google Drive link or file size.")
+        else:
+            # Unzip only if it seems valid
+            with zipfile.ZipFile("PlantDoc-Dataset.zip", 'r') as zip_ref:
+                zip_ref.extractall("PlantDoc-Dataset")
+            
 
 # Call the function at app start
 download_and_extract_dataset()
-
 
 
 # Load images from directories with subdirectories as categories
